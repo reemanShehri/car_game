@@ -1,4 +1,6 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Highway Limits 3D</title>
+<!DOCTYPE html>
+<!-- © 2026 Reeman Shehri. All rights reserved. -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Highway Limits 3D</title><meta name="author" content="Reeman Shehri"><meta name="copyright" content="© 2026 Reeman Shehri. All rights reserved.">
 <style>
 :root{--bg:#06080f;--fg:#fff;--ac:#ffcc00;--bl:#2bb8ff;--pn:rgba(8,12,22,.86);box-sizing:border-box}
 @media (prefers-color-scheme:dark){:root{--bg:#06080f;--fg:#fff}}
@@ -57,9 +59,12 @@ html{overscroll-behavior:none}*{-webkit-tap-highlight-color:transparent}
 #touch #tN{background:rgba(0,200,120,.35)!important}#touch #tG{background:rgba(255,204,0,.28)!important}#touch #tB{background:rgba(255,60,60,.3)!important}#touch button:active{transform:scale(.92)}
 #tL{left:calc(10px + env(safe-area-inset-left,0px))!important}#tR{left:calc(var(--s) + 18px + env(safe-area-inset-left,0px))!important}#tN{right:calc(10px + env(safe-area-inset-right,0px))!important}#tG{right:calc(var(--s) + 18px + env(safe-area-inset-right,0px))!important}#tB{right:calc(var(--s)*2 + 26px + env(safe-area-inset-right,0px))!important}
 @media (max-width:640px){.ov{align-items:flex-end;padding:0}.pn{width:100%;max-height:62%;border-radius:18px 18px 0 0;padding:14px 14px calc(14px + env(safe-area-inset-bottom,0px));gap:9px}h1{font-size:22px}.row b{min-width:0}#pz{align-items:center!important;padding:20px!important}#pz .pn{border-radius:18px;max-height:90%}#btns{top:calc(96px + env(safe-area-inset-top,0px))}}
-@media (max-height:520px){.ov{padding:8px}.pn{padding:10px;gap:6px;max-height:100%}h1{font-size:18px}.pt{font-size:14px}button{padding:6px 10px;font-size:13px}.go{font-size:16px;padding:8px}.up{font-size:12px;padding:3px 8px}.pn>small:last-child{display:none}#spd{font-size:30px}#tl{font-size:13px}#score{font-size:18px}#tm{font-size:20px}#tr{width:140px;font-size:11px}#pg,#nb{height:7px}#btns{top:84px;gap:6px}#btns button{width:38px;height:38px;padding:0}#pops{top:18%}.pop{font-size:22px}.pop.big{font-size:60px}}
+@media (max-height:520px){.ov{padding:8px}.pn{padding:10px;gap:6px;max-height:100%}h1{font-size:18px}.pt{font-size:14px}button{padding:6px 10px;font-size:13px}.go{font-size:16px;padding:8px}.up{font-size:12px;padding:3px 8px}.pn>.hs{display:none}#spd{font-size:30px}#tl{font-size:13px}#score{font-size:18px}#tm{font-size:20px}#tr{width:140px;font-size:11px}#pg,#nb{height:7px}#btns{top:84px;gap:6px}#btns button{width:38px;height:38px;padding:0}#pops{top:18%}.pop{font-size:22px}.pop.big{font-size:60px}}
+#cr{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(4px + env(safe-area-inset-bottom,0px));font-size:10px;letter-spacing:1px;opacity:.55;pointer-events:none;white-space:nowrap;text-shadow:0 1px 3px #000}.cp{font-size:11px;color:#8294b0;margin-top:2px}
+#btns{top:calc(10px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);flex-direction:row;align-items:center;gap:8px}#btns button{width:44px;height:44px}
+@media (max-width:640px){#hud{--s:min(68px,15.5vw)}#btns{top:auto;bottom:calc(var(--s) + 34px + env(safe-area-inset-bottom,0px));left:calc(10px + env(safe-area-inset-left,0px));transform:none;gap:6px}#btns button{width:40px;height:40px}#btns #bc{height:40px;padding:0 10px 0 8px;font-size:11px}.hint{bottom:calc(var(--s) + 90px + env(safe-area-inset-bottom,0px))}#hp{width:96px}#hp i{font-size:15px}}
 </style></head><body>
-<canvas id="c"></canvas><canvas id="fx"></canvas><div id="vg"></div>
+<canvas id="c"></canvas><canvas id="fx"></canvas><div id="vg"></div><div id="cr">© 2026 Reeman Shehri</div>
 <div id="hud" class="hide">
 <div id="tl"><div>🏆 <span id="score">0</span></div><div>🪙 <span id="coins">0</span></div><div id="dist">00.00 KM</div><div id="tm">60.0 s</div><div id="warn">⚠ TRAFFIC BEHIND</div><div id="hp"></div></div>
 <div id="tr"><div id="pg"><i id="pgi"></i></div><div id="lk">LAST KM --</div><div><span id="gear">S1</span> <span id="spd">0</span> <small>KMH</small></div><div id="nb"><i id="nbi"></i><span>N2O</span></div></div>
@@ -217,7 +222,7 @@ function ui(){const C=CARS[P.car],u=P.up[P.car];
  <small>📍 Race location</small><div class=row>${ST.map((s,i)=>`<button class="${P.stage==i?'on':''}" onclick=ss(${i})>${s.e} ${s.n}</button>`).join('')}</div>
  <div class=row><button class="${P.tw?'':'on'}" onclick=tw(0)>One-way</button><button class="${P.tw?'on':''}" onclick=tw(1)>Two-way</button></div>
  <div class=row><button onclick=tq()>Graphics: ${LQ?'Mobile':'High'}</button><button onclick=fs()>⛶ Fullscreen</button></div>
- <button class=go onclick=start()>START</button><small>Arrows/WASD steer &amp; gas · Space brake · Shift/N nitro · C camera · H horn · P pause</small>`}
+ <button class=go onclick=start()>START</button><small class=hs>Arrows/WASD steer &amp; gas · Space brake · Shift/N nitro · C camera · H horn · P pause</small><div class=cp>© 2026 Reeman Shehri · All rights reserved</div>`}
 function cc(d){P.car=(P.car+3+d)%3;sv();showroom();ui()}
 function pc(i){P.col[P.car]=i;sv();paint(show,COL[i]);ui()}
 function bu(i){const u=P.up[P.car];if(u[i]<5&&P.pts>=(u[i]+1)*600){P.pts-=(u[i]+1)*600;u[i]++;sv();ui()}}
